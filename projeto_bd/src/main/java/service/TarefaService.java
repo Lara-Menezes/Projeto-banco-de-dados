@@ -53,4 +53,14 @@ public class TarefaService {
     public void excluirTarefa(Long id) {
         tarefaDAO.excluir(id);
     }
+
+   
+    public void concluirTarefa(Long id) {
+        Tarefa tarefa = tarefaDAO.buscarPorId(id);
+        if (tarefa == null) {
+            throw new IllegalArgumentException("Tarefa não encontrada");
+        }
+        tarefa.setConcluida(true);
+        tarefaDAO.atualizar(tarefa);
+    }
 }

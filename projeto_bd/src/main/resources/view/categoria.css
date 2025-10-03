@@ -1,0 +1,48 @@
+
+.label-form {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2E7D32; 
+}
+
+
+.textfield-red {
+    -fx-border-color: #C62828;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 5;
+}
+
+
+.button-green {
+    -fx-background-color: #2E7D32;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-background-radius: 8px;
+    -fx-pref-width: 150px;
+    -fx-effect: dropshadow(gaussian, gray, 4, 0.3, 2, 2);
+    -fx-cursor: hand;
+}
+
+.button-green:hover {
+    -fx-background-color: #1B5E20;
+}
+
+
+.button-round {
+    -fx-background-color: #C62828;
+    -fx-background-radius: 50%;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-min-width: 40px;
+    -fx-min-height: 40px;
+    -fx-effect: dropshadow(gaussian, gray, 4, 0.3, 2, 2);
+    -fx-cursor: hand;
+}
+
+.button-round:hover {
+    -fx-background-color: #b71c1c;
+}

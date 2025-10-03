@@ -30,5 +30,19 @@
             <artifactId>jakarta.persistence-api</artifactId>
             <version>3.1.0</version>
         </dependency>
+        
+    	<!-- JavaFX Controls -->
+    	<dependency>
+        	<groupId>org.openjfx</groupId>
+        	<artifactId>javafx-controls</artifactId>
+        	<version>21.0.1</version>
+    	</dependency>
+
+    	<!-- JavaFX FXML -->
+    	<dependency>
+        	<groupId>org.openjfx</groupId>
+        	<artifactId>javafx-fxml</artifactId>
+        	<version>21.0.1</version>
+    	</dependency>
     </dependencies>
 </project>

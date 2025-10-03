@@ -1,0 +1,42 @@
+.root {
+    -fx-background-color: white;
+}
+
+
+.label-form {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2E7D32;
+}
+
+
+.textfield-red {
+    -fx-border-color: #C62828;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 5;
+    -fx-pref-width: 300px; 
+}
+
+
+.button-round {
+    -fx-background-color: #C62828;
+    -fx-background-radius: 50%;
+    -fx-min-width: 55px;
+    -fx-min-height: 55px;
+    -fx-effect: dropshadow(gaussian, gray, 4, 0.3, 2, 2);
+    -fx-cursor: hand;
+}
+.button-round:hover { -fx-background-color: #b71c1c; }
+
+
+.button-round-green {
+    -fx-background-color: #2E7D32;
+    -fx-background-radius: 50%;
+    -fx-min-width: 55px;
+    -fx-min-height: 55px;
+    -fx-effect: dropshadow(gaussian, gray, 4, 0.3, 2, 2);
+    -fx-cursor: hand;
+}
+.button-round-green:hover { -fx-background-color: #1B5E20; }
