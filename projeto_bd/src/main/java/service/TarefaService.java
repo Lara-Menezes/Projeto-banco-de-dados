@@ -7,6 +7,7 @@ import model.Categoria;
 import model.Tarefa;
 import model.Usuario;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class TarefaService {
@@ -23,6 +24,10 @@ public class TarefaService {
         Categoria categoria = categoriaDAO.buscarPorId(categoriaId);
         if (categoria == null) {
             throw new IllegalArgumentException("Categoria não encontrada");
+        }
+
+        if(tarefa.getPrazo().isBefore(LocalDate.now())){
+            throw new IllegalArgumentException("Data inválida");
         }
 
         tarefa.setOwner(usuario);
