@@ -13,7 +13,6 @@ public class UsuarioFXController {
     @FXML private TextField txtNome;
     @FXML private TextField txtEmail;
     @FXML private Button btnSalvar;
-    @FXML private Button btnUsuarios;
     @FXML private Button btnVoltar;
     @FXML private Label lblMensagem;
 
@@ -23,7 +22,7 @@ public class UsuarioFXController {
     public void initialize() {
         btnSalvar.setOnAction(e -> salvarUsuario());
         btnVoltar.setOnAction(this::voltar);    
-        btnUsuarios.setOnAction(this::abrirUsuarios); 
+
     }
 
     private void salvarUsuario() {
@@ -50,16 +49,6 @@ public class UsuarioFXController {
         } catch (Exception e) {
             e.printStackTrace();
             lblMensagem.setText("Erro ao carregar tela de menu!");
-        }
-    }
-
-    
-    private void abrirUsuarios(ActionEvent event) {
-        try {
-            ScreenManager.changeScene("usuarioList.fxml");
-        } catch (Exception e) {
-            e.printStackTrace();
-            lblMensagem.setText("Erro ao carregar lista de usuários!");
         }
     }
 
