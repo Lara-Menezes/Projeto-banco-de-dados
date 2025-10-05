@@ -12,7 +12,6 @@ public class CategoriaFXController {
 
     @FXML private TextField txtNomeCategoria;
     @FXML private Button btnSalvar;
-    @FXML private Button btnCategorias;
     @FXML private Button btnVoltar;
     @FXML private Label lblMensagem;
 
