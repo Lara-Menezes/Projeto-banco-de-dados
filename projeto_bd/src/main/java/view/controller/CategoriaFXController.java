@@ -21,7 +21,6 @@ public class CategoriaFXController {
     public void initialize() {
         btnSalvar.setOnAction(e -> salvarCategoria());
         btnVoltar.setOnAction(this::voltar);
-        btnCategorias.setOnAction(this::abrirCategorias);
     }
 
     private void salvarCategoria() {
