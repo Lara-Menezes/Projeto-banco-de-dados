@@ -30,7 +30,6 @@
            
             <VBox alignment="CENTER" spacing="15">
                 <Button fx:id="btnSalvar" text="Salvar" styleClass="button-green"/>
-                <Button fx:id="btnCategorias" text="Categorias" styleClass="button-green"/>
                 <Label fx:id="lblMensagem" text="" styleClass="label-form"/>
             </VBox>
 
