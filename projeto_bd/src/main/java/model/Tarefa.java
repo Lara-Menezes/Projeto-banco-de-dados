@@ -2,14 +2,7 @@ package model;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Table(name = "TB_TAREFAS")
 @Entity
@@ -27,10 +20,10 @@ public class Tarefa {
 	private LocalDate prazo;
 	@Column
 	private boolean concluida;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "usuario_id")
 	private Usuario owner;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
 	
@@ -81,7 +74,4 @@ public class Tarefa {
 		this.categoria = categoria;
 	}
 
-	
-	
-	
 }

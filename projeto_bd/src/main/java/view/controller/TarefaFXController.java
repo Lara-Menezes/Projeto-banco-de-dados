@@ -1,13 +1,19 @@
 package view.controller;
 
 import controller.TarefaController;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 import model.Categoria;
+import model.Tarefa;
 import model.Usuario;
 import service.CategoriaService;
 import service.UsuarioService;
 import view.ScreenManager;
+
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class TarefaFXController {
 
@@ -18,7 +24,8 @@ public class TarefaFXController {
     @FXML private ComboBox<Categoria> cbCategoria; 
 
     @FXML private Button btnSalvar;
-    @FXML private Button btnVoltar;   
+    @FXML private Button btnVoltar;
+    @FXML private Button btnListar;
     @FXML private Label lblMensagem;
 
     private final TarefaController tarefaController = new TarefaController();
@@ -28,12 +35,17 @@ public class TarefaFXController {
     @FXML
     public void initialize() {
         btnSalvar.setOnAction(e -> salvarTarefa());
-        btnVoltar.setOnAction(e -> voltar()); 
-
-        
+        btnVoltar.setOnAction(e -> voltar());
         cbUsuario.getItems().addAll(usuarioService.listarUsuarios());
         cbCategoria.getItems().addAll(categoriaService.listarCategorias());
 
+        btnListar.setOnAction(e -> {
+            try {
+                ScreenManager.changeScene("TabelaTarefa.fxml"); // ou abre em nova janela
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
         
         cbUsuario.setCellFactory(param -> new ListCell<Usuario>() {
             @Override

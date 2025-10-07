@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="view.controller.ListaFXController"
+            prefHeight="400.0" prefWidth="600.0">
+    <children>
+        <VBox alignment="CENTER" spacing="30" prefWidth="600">
+           <Label text="Lista de tarefas" style="-fx-font-size: 20px; -fx-font-weight: bold;-fx-text-fill: #3b3b3b;"/>
+            <TableView fx:id="tabelaTarefas" prefHeight="350" prefWidth="600">
+                <columns>
+                    <TableColumn fx:id="colTitulo" text="Título" prefWidth="120"/>
+                    <TableColumn fx:id="colDescricao" text="Descrição" prefWidth="150" />
+                    <TableColumn fx:id="colPrazo" text="Prazo" prefWidth="100" />
+                    <TableColumn fx:id="colUsuario" text="Usuário" prefWidth="100" />
+                    <TableColumn fx:id="colCategoria" text="Categoria" prefWidth="100" />
+                </columns>
+            </TableView>
+            <HBox spacing="10" alignment="CENTER">
+                <Button fx:id="btnVoltar" text="Voltar" style="-fx-background-color: #ffcccc; -fx-background-radius: 20; -fx-text-fill: black; -fx-font-weight: bold;" />
+                <Button fx:id="btnAjuda" text="Ajuda" style="-fx-background-color: #c6f6d5; -fx-background-radius: 20; -fx-text-fill: black; -fx-font-weight: bold;" />
+            </HBox>
+        </VBox>
+    </children>
+</AnchorPane>

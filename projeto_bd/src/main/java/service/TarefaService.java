@@ -8,6 +8,7 @@ import model.Tarefa;
 import model.Usuario;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TarefaService {
@@ -40,15 +41,29 @@ public class TarefaService {
     }
 
     public List<Tarefa> listarTarefas() {
-        return tarefaDAO.listarTodos();
-    }
+        List<Tarefa> tarefas = tarefaDAO.listarTodos();
+        List<Tarefa> tarefa = new ArrayList<>();
+        for (Tarefa t : tarefas) {
+            Tarefa trf = new Tarefa();
+            trf.setTitulo(t.getTitulo());
+            trf.setDescricao(t.getDescricao());
+            trf.setId(t.getId());
+            trf.setOwner(t.getOwner());
+            trf.setCategoria(t.getCategoria());
+            trf.setPrazo(t.getPrazo());
 
-    public List<Tarefa> listarTarefasPorUsuario(Long usuarioId) {
-        return tarefaDAO.listarPorUsuario(usuarioId);
-    }
-
-    public List<Tarefa> listarTarefasPorCategoria(Long categoriaId) {
-        return tarefaDAO.listarPorCategoria(categoriaId);
+            tarefa.add(trf);
+//            System.out.printf(
+//                    "Tarefa: %-20s | Descrição: %-30s |id: %-5s | Usuário: %-15s | Categoria: %-10s | Prazo: %s%n",
+//                    t.getTitulo(),
+//                    t.getDescricao(),
+//                    t.getId(),
+//                    t.getOwner().getNome(),
+//                    t.getCategoria().getNome(),
+//                    t.getPrazo()
+//            );
+        }
+        return tarefa;
     }
 
     public void atualizarTarefa(Tarefa tarefa) {
@@ -58,7 +73,6 @@ public class TarefaService {
     public void excluirTarefa(Long id) {
         tarefaDAO.excluir(id);
     }
-
    
     public void concluirTarefa(Long id) {
         Tarefa tarefa = tarefaDAO.buscarPorId(id);
