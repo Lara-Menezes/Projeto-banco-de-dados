@@ -19,6 +19,12 @@
     -fx-pref-width: 300px; 
 }
 
+.table-view .column-header .label {
+    -fx-text-fill: #ffffff;          
+    -fx-font-weight: bold;           
+    -fx-font-size: 14px;    
+    -fx-background-color: #2E7D32;          
+}
 
 .button-round {
     -fx-background-color: #C62828;

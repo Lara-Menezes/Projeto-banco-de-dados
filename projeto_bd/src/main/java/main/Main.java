@@ -1,8 +1,9 @@
-package view;
+package main;
 
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import view.ScreenManager;
 
 public class Main extends Application {
 
