@@ -2,42 +2,77 @@ package service;
 
 import dao.*;
 import model.*;
+import dto.TarefaDTO;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class TarefaService {
 
-    private final TarefaDAO tarefaDAO = new TarefaDAO();
-    private final UsuarioDAO usuarioDAO = new UsuarioDAO();
-    private final CategoriaDAO categoriaDAO = new CategoriaDAO();
+    private final TarefaDAO tarefaDAO;
+    private final UsuarioDAO usuarioDAO;
+    private final CategoriaDAO categoriaDAO;
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-    public void criarTarefa(Long usuarioId, Long categoriaId, Tarefa tarefa) {
-        Usuario usuario = usuarioDAO.buscarPorId(usuarioId);
+    public TarefaService(TarefaDAO tarefaDAO, UsuarioDAO usuarioDAO, CategoriaDAO categoriaDAO) {
+        this.tarefaDAO = tarefaDAO;
+        this.usuarioDAO = usuarioDAO;
+        this.categoriaDAO = categoriaDAO;
+    }
+
+    public void criarTarefa(TarefaDTO dto) {
+        Usuario usuario = usuarioDAO.buscarPorId(dto.getUsuarioId());
         if (usuario == null) throw new IllegalArgumentException("Usuário não encontrado.");
 
-        Categoria categoria = categoriaDAO.buscarPorId(categoriaId);
+        Categoria categoria = categoriaDAO.buscarPorId(dto.getCategoriaId());
         if (categoria == null) throw new IllegalArgumentException("Categoria não encontrada.");
 
-        if (tarefa.getPrazo().isBefore(LocalDate.now()))
+        LocalDate prazo = LocalDate.parse(dto.getPrazo(), formatter);
+        if (prazo.isBefore(LocalDate.now()))
             throw new IllegalArgumentException("Data inválida: o prazo não pode ser anterior à data atual.");
 
+        Tarefa tarefa = new Tarefa();
+        tarefa.setTitulo(dto.getTitulo());
+        tarefa.setDescricao(dto.getDescricao());
+        tarefa.setPrazo(prazo);
+        tarefa.setConcluida(dto.isConcluida());
         tarefa.setOwner(usuario);
         tarefa.setCategoria(categoria);
+
         tarefaDAO.salvar(tarefa);
     }
 
-    public void atualizarTarefa(Tarefa tarefa) {
+    public void atualizarTarefa(Long id, TarefaDTO dto) {
+        Tarefa tarefa = tarefaDAO.buscarPorId(id);
+        if (tarefa == null) throw new IllegalArgumentException("Tarefa não encontrada.");
+
+        LocalDate prazo = LocalDate.parse(dto.getPrazo(), formatter);
+        tarefa.setTitulo(dto.getTitulo());
+        tarefa.setDescricao(dto.getDescricao());
+        tarefa.setPrazo(prazo);
+        tarefa.setConcluida(dto.isConcluida());
+
+        Usuario usuario = usuarioDAO.buscarPorId(dto.getUsuarioId());
+        Categoria categoria = categoriaDAO.buscarPorId(dto.getCategoriaId());
+        if (usuario == null || categoria == null)
+            throw new IllegalArgumentException("Usuário ou categoria inválidos.");
+
+        tarefa.setOwner(usuario);
+        tarefa.setCategoria(categoria);
+
         tarefaDAO.atualizar(tarefa);
     }
 
     public void excluirTarefa(Long id) {
+        Tarefa tarefa = tarefaDAO.buscarPorId(id);
+        if (tarefa == null) throw new IllegalArgumentException("Tarefa não encontrada.");
         tarefaDAO.excluir(id);
     }
 
-    public void concluirTarefa(Long id) {
+    public void concluirTarefa(Long id, boolean status) {
         Tarefa tarefa = tarefaDAO.buscarPorId(id);
         if (tarefa == null) throw new IllegalArgumentException("Tarefa não encontrada.");
-        tarefa.setConcluida(true);
+        tarefa.setConcluida(status);
         tarefaDAO.atualizar(tarefa);
     }
 
@@ -45,3 +80,4 @@ public class TarefaService {
         return tarefaDAO.listarPorUsuarioECategoria(usuarioId, categoriaId);
     }
 }
+

@@ -1,44 +1,65 @@
 package controller;
 
-import model.*;
 import service.TarefaService;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import model.Tarefa;
+import dto.TarefaDTO;
 import java.util.List;
 
 /*
- * Essa classe é responsável por controllar a regra de negócio (service, dao) pedindo requisições  para a mesma para salvar
- * listar, excluir, atualizar e concluir uma tarefa. Ela instancia um objetp final tarefaService que tem a lógica de negócio
- * e que chama os daos para obter dados das entidades, por meio disso ela faz a lógica: passando métodos públicos para executar as
- * funções do CRUD. 
+ * TarefaController chama o TarefaService para executar a lógica de negócio de tarefas;
+ * Recebe DTOs da interface, validações simples e retorna mensagens de sucesso ou erro;
+ * Não manipula o banco diretamente; delega operações como salvar, atualizar, excluir ou concluir ao Service.
  */
 
 public class TarefaController {
 
-    private final TarefaService tarefaService = new TarefaService();
+    private final TarefaService tarefaService;
 
-    public String salvarTarefa(String titulo, String descricao, String prazoStr, boolean concluida,
-                               Usuario usuario, Categoria categoria) {
-        if (titulo == null || titulo.isBlank() ||
-            descricao == null || descricao.isBlank() ||
-            prazoStr == null || prazoStr.isBlank() ||
-            usuario == null || categoria == null) {
-            return "Preencha todos os campos!";
-        }
+    public TarefaController(TarefaService tarefaService) {
+        this.tarefaService = tarefaService;
+    }
 
+    public String salvarTarefa(TarefaDTO dto) {
         try {
-            LocalDate prazo = LocalDate.parse(prazoStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            Tarefa tarefa = new Tarefa();
-            tarefa.setTitulo(titulo);
-            tarefa.setDescricao(descricao);
-            tarefa.setPrazo(prazo);
-            tarefa.setConcluida(concluida);
-            tarefa.setOwner(usuario);
-            tarefa.setCategoria(categoria);
-            tarefaService.criarTarefa(usuario.getId(), categoria.getId(), tarefa);
+            tarefaService.criarTarefa(dto);
             return "Tarefa cadastrada com sucesso!";
+        } catch (IllegalArgumentException e) {
+            return e.getMessage();
         } catch (Exception e) {
             return "Erro ao salvar tarefa: " + e.getMessage();
+        }
+    }
+
+    public String atualizarTarefa(Long id, TarefaDTO dto) {
+        try {
+            tarefaService.atualizarTarefa(id, dto);
+            return "Tarefa atualizada com sucesso!";
+        } catch (IllegalArgumentException e) {
+            return e.getMessage();
+        } catch (Exception e) {
+            return "Erro ao atualizar tarefa: " + e.getMessage();
+        }
+    }
+
+    public String excluirTarefa(Long id) {
+        try {
+            tarefaService.excluirTarefa(id);
+            return "Tarefa excluída com sucesso!";
+        } catch (IllegalArgumentException e) {
+            return e.getMessage();
+        } catch (Exception e) {
+            return "Erro ao excluir tarefa: " + e.getMessage();
+        }
+    }
+
+    public String concluirTarefa(Long id, boolean status) {
+        try {
+            tarefaService.concluirTarefa(id, status);
+            return "Tarefa atualizada com sucesso!";
+        } catch (IllegalArgumentException e) {
+            return e.getMessage();
+        } catch (Exception e) {
+            return "Erro ao concluir tarefa: " + e.getMessage();
         }
     }
 

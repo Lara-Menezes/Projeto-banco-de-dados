@@ -1,6 +1,10 @@
 package view.controller;
 
 import controller.TarefaController;
+import dao.CategoriaDAO;
+import dao.TarefaDAO;
+import dao.UsuarioDAO;
+import dto.TarefaDTO;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -9,6 +13,7 @@ import model.Categoria;
 import model.Tarefa;
 import model.Usuario;
 import service.CategoriaService;
+import service.TarefaService;
 import service.UsuarioService;
 import view.ScreenManager;
 
@@ -38,9 +43,17 @@ public class TarefaFXController {
     @FXML private TableColumn<Tarefa, String> colPrazo;
     @FXML private TableColumn<Tarefa, Boolean> colConcluida;
 
-    private final TarefaController tarefaController = new TarefaController();
     private final UsuarioService usuarioService = new UsuarioService();
     private final CategoriaService categoriaService = new CategoriaService();
+    private final TarefaController tarefaController;
+
+    public TarefaFXController() {
+        TarefaDAO tarefaDAO = new TarefaDAO();
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        CategoriaDAO categoriaDAO = new CategoriaDAO();
+        TarefaService tarefaService = new TarefaService(tarefaDAO, usuarioDAO, categoriaDAO);
+        this.tarefaController = new TarefaController(tarefaService);
+    }
 
     private Long tarefaSelecionadaId = null;
 
@@ -110,22 +123,80 @@ public class TarefaFXController {
     }
 
     private void salvarTarefa() {
-        String titulo = txtTitulo.getText();
-        String descricao = txtDescricao.getText();
-        String prazoStr = txtPrazo.getText();
         Usuario usuario = cbUsuario.getValue();
         Categoria categoria = cbCategoria.getValue();
 
         if (usuario == null || categoria == null) {
             mostrarMensagem("Selecione usuário e categoria!");
             return;
-        }else {
-            String resultado = tarefaController.salvarTarefa(titulo, descricao, prazoStr, false, usuario, categoria);
-            mostrarMensagem(resultado);
-            if (resultado.contains("Tarefa criada com sucesso!")) {
-                limparCampos();
-                listarTarefas();
-            }
+        }
+
+        TarefaDTO dto = new TarefaDTO();
+        dto.setTitulo(txtTitulo.getText());
+        dto.setDescricao(txtDescricao.getText());
+        dto.setPrazo(txtPrazo.getText());
+        dto.setConcluida(false);
+        dto.setUsuarioId(usuario.getId());
+        dto.setCategoriaId(categoria.getId());
+
+        String resultado = tarefaController.salvarTarefa(dto);
+        mostrarMensagem(resultado);
+
+        if (resultado.contains("sucesso")) {
+            limparCampos();
+            listarTarefas();
+        }
+    }
+    
+    private void atualizarTarefa() {
+        if (tarefaSelecionadaId == null) {
+            mostrarMensagem("Selecione uma tarefa para atualizar!");
+            return;
+        }
+
+        TarefaDTO dto = new TarefaDTO();
+        dto.setTitulo(txtTitulo.getText());
+        dto.setDescricao(txtDescricao.getText());
+        dto.setPrazo(txtPrazo.getText());
+        dto.setConcluida(false);
+        dto.setUsuarioId(cbUsuario.getValue().getId());
+        dto.setCategoriaId(cbCategoria.getValue().getId());
+
+        String resultado = tarefaController.atualizarTarefa(tarefaSelecionadaId, dto);
+        mostrarMensagem(resultado);
+
+        if (resultado.contains("sucesso")) {
+            limparCampos();
+            listarTarefas();
+        }
+    }
+
+    private void excluirTarefa() {
+        if (tarefaSelecionadaId == null) {
+            mostrarMensagem("Selecione uma tarefa para excluir!");
+            return;
+        }
+
+        String resultado = tarefaController.excluirTarefa(tarefaSelecionadaId);
+        mostrarMensagem(resultado);
+
+        if (resultado.contains("sucesso")) {
+            limparCampos();
+            listarTarefas();
+        }
+    }
+
+    private void concluirTarefa() {
+        if (tarefaSelecionadaId == null) {
+            mostrarMensagem("Selecione uma tarefa para concluir!");
+            return;
+        }
+
+        String resultado = tarefaController.concluirTarefa(tarefaSelecionadaId, true);
+        mostrarMensagem(resultado);
+
+        if (resultado.contains("sucesso")) {
+            listarTarefas();
         }
     }
 
@@ -146,7 +217,7 @@ public class TarefaFXController {
     private void preencherCampos(Tarefa tarefa) {
         txtTitulo.setText(tarefa.getTitulo());
         txtDescricao.setText(tarefa.getDescricao());
-        txtPrazo.setText(tarefa.getPrazo().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        txtPrazo.setText(tarefa.getPrazo().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
         cbUsuario.setValue(tarefa.getOwner());
         cbCategoria.setValue(tarefa.getCategoria());
     }

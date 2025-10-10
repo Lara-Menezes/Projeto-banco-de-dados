@@ -6,9 +6,11 @@
 		<class>entity.Categoria</class>
         
         <properties>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/meubanco"/>
-            <property name="jakarta.persistence.jdbc.user" value="postgres"/>
-            <property name="jakarta.persistence.jdbc.password" value="12345"/>
+        	// altere para os dados do seu banco
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/meu-banco"/>
+            <property name="jakarta.persistence.jdbc.user" value="postgres"/>  //seu user
+            <property name="jakarta.persistence.jdbc.password" value="12345"/> //sua senha
+            
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
