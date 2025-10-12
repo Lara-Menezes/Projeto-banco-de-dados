@@ -27,7 +27,7 @@ public class TarefaService {
         Categoria categoria = categoriaDAO.buscarPorId(dto.getCategoriaId());
         if (categoria == null) throw new IllegalArgumentException("Categoria não encontrada.");
 
-        LocalDate prazo = LocalDate.parse(dto.getPrazo(), formatter);
+        LocalDate prazo = dto.getPrazo();
         if (prazo.isBefore(LocalDate.now()))
             throw new IllegalArgumentException("Data inválida: o prazo não pode ser anterior à data atual.");
 
@@ -46,7 +46,7 @@ public class TarefaService {
         Tarefa tarefa = tarefaDAO.buscarPorId(id);
         if (tarefa == null) throw new IllegalArgumentException("Tarefa não encontrada.");
 
-        LocalDate prazo = LocalDate.parse(dto.getPrazo(), formatter);
+        LocalDate prazo = dto.getPrazo();
         tarefa.setTitulo(dto.getTitulo());
         tarefa.setDescricao(dto.getDescricao());
         tarefa.setPrazo(prazo);
