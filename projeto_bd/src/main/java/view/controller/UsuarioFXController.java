@@ -15,6 +15,8 @@ public class UsuarioFXController {
     @FXML private Button btnSalvar;
     @FXML private Button btnVoltar;
     @FXML private Label lblMensagem;
+    @FXML private TextField txtId;
+    @FXML private Button btnAtualizar;
 
     private final UsuarioController usuarioController = new UsuarioController();
 
@@ -22,7 +24,6 @@ public class UsuarioFXController {
     public void initialize() {
         btnSalvar.setOnAction(e -> salvarUsuario());
         btnVoltar.setOnAction(this::voltar);    
-
     }
 
     private void salvarUsuario() {
@@ -42,6 +43,29 @@ public class UsuarioFXController {
         lblMensagem.setText(resultado);
     }
 
+    @FXML
+    private void atualizar(ActionEvent event) {
+    	try {
+    		String idText = txtId.getText();
+    		if(idText == null || idText.isBlank()) {
+    			lblMensagem.setText("Informe o id do usuário para atualizar.");
+    			return;
+    		}
+    		Long id = Long.parseLong(idText);
+    		String nome = txtNome.getText();
+    		String email = txtEmail.getText();
+    		UsuarioController uc = new UsuarioController();
+    		String resultado = uc.atualizarUsuario(id, nome, email);
+    		lblMensagem.setText(resultado);
+    	} 
+    	catch(NumberFormatException e) {
+    		lblMensagem.setText("ID inválido");
+    	} 
+    	catch (Exception e) {
+    		e.printStackTrace();
+    		lblMensagem.setText("Erro ao atualizar o usuário");
+    	}
+    }
 
     private void voltar(ActionEvent event) {
         try {
@@ -51,5 +75,4 @@ public class UsuarioFXController {
             lblMensagem.setText("Erro ao carregar tela de menu!");
         }
     }
-
 }
