@@ -35,7 +35,7 @@
            
         <!-- campo que informa o id do usuario a ser atualizado --> 
 		<TextField fx:id="txtId" promptText="ID (para atualizar)" />
-		<Button fx:id="btnAtualizar" text="Atualizar" onAction="#atualizar" />
+		<Button fx:id="btnAtualizar" text="Atualizar" onAction="#atualizar" styleClass="button-green"/>
             
                 <Button fx:id="btnSalvar" text="Salvar" styleClass="button-green"/>
                 <Label fx:id="lblMensagem" text="" styleClass="label-form"/>
