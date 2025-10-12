@@ -24,9 +24,11 @@ public class TarefaController {
             tarefaService.criarTarefa(dto);
             return "Tarefa cadastrada com sucesso!";
         } catch (IllegalArgumentException e) {
-            return e.getMessage();
+        	System.err.println("Error: " +  e.getMessage());
+            return "Não foi possível salvar a tarefa";
         } catch (Exception e) {
-            return "Erro ao salvar tarefa: " + e.getMessage();
+        	System.err.println("Error: " +  e.getMessage());
+            return "Não foi possível salvar a tarefa";
         }
     }
 
@@ -35,9 +37,11 @@ public class TarefaController {
             tarefaService.atualizarTarefa(id, dto);
             return "Tarefa atualizada com sucesso!";
         } catch (IllegalArgumentException e) {
-            return e.getMessage();
+        	System.err.println("Error: " + e.getMessage());
+            return "Não foi possível atualizar a tarefa";
         } catch (Exception e) {
-            return "Erro ao atualizar tarefa: " + e.getMessage();
+        	System.err.println("Error: " + e.getMessage());
+            return "Não foi possível atualizar a tarefa";
         }
     }
 
@@ -46,9 +50,11 @@ public class TarefaController {
             tarefaService.excluirTarefa(id);
             return "Tarefa excluída com sucesso!";
         } catch (IllegalArgumentException e) {
-            return e.getMessage();
+        	System.err.println("Error: " + e.getMessage());
+        	return "Não foi possível excluir a tarefa";
         } catch (Exception e) {
-            return "Erro ao excluir tarefa: " + e.getMessage();
+        	System.err.println("Error: " + e.getMessage());
+            return "Não foi possível excluir a tarefa";
         }
     }
 
@@ -57,9 +63,11 @@ public class TarefaController {
             tarefaService.concluirTarefa(id, status);
             return "Tarefa concluída com sucesso!";
         } catch (IllegalArgumentException e) {
-            return e.getMessage();
+        	System.err.println("Error: " + e.getMessage());
+            return "Não foi possível concluir a tarefa";
         } catch (Exception e) {
-            return "Erro ao concluir tarefa: " + e.getMessage();
+        	System.err.println("Error: " + e.getMessage());
+            return "Não foi possível concluir a tarefa";
         }
     }
 
