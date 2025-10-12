@@ -23,4 +23,17 @@ public class UsuarioController {
         usuarioService.criarUsuario(usuario);
         return "Usuário cadastrado com sucesso!";
     }
+    
+    public String atualizarUsuario(Long id, String nome, String email) {
+    	if(id == null) return "id inválido!";
+    	if(nome == null || nome.isBlank() || email == null || email.isBlank()) 
+    		return "Preencha os campos!";
+    	
+    	Usuario usuario = new Usuario();
+    	usuario.setId(id);
+    	usuario.setNome(nome);
+    	usuario.setEmail(email);
+    	usuarioService.atualizarUsuario(usuario);
+    	return "Sucesso na atualização de usuário!";
+    }
 }
