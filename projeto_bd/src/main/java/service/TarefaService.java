@@ -79,5 +79,9 @@ public class TarefaService {
     public List<Tarefa> listarTarefasPorUsuarioECategoria(Long usuarioId, Long categoriaId) {
         return tarefaDAO.listarPorUsuarioECategoria(usuarioId, categoriaId);
     }
+    
+    public List<Tarefa> listarTodasTarefas() {
+        return tarefaDAO.listarTodos();
+    }
 }
 

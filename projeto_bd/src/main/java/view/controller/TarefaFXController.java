@@ -62,8 +62,8 @@ public class TarefaFXController {
         // Inicializa os botões
         btnSalvar.setOnAction(e -> salvarTarefa());
 //        btnAtualizar.setOnAction(e -> atualizarTarefa()); para quando for implementar a atualização da tarefa
-//        btnExcluir.setOnAction(e -> excluirTarefa()); para quando for implementar a remoção da tarefa
-//        btnConcluir.setOnAction(e -> concluirTarefa()); para quando for implementar a conclusão da tarefa 
+        btnExcluir.setOnAction(e -> excluirTarefa());
+        btnConcluir.setOnAction(e -> concluirTarefa()); 
         btnListar.setOnAction(e -> listarTarefas());
         btnVoltar.setOnAction(e -> voltar());
 
@@ -73,6 +73,7 @@ public class TarefaFXController {
 
         configurarComboBoxes();
         configurarTabela();
+        carregarTarefas();
     }
 
     private void configurarComboBoxes() {
@@ -121,6 +122,11 @@ public class TarefaFXController {
             }
         });
     }
+    
+    private void carregarTarefas() {
+        List<Tarefa> tarefas = tarefaController.listarTodasTarefas();
+        tabelaTarefas.setItems(FXCollections.observableArrayList(tarefas));
+    }
 
     private void salvarTarefa() {
         Usuario usuario = cbUsuario.getValue();
@@ -144,7 +150,7 @@ public class TarefaFXController {
 
         if (resultado.contains("sucesso")) {
             limparCampos();
-            listarTarefas();
+            carregarTarefas();
         }
     }
     
@@ -167,7 +173,7 @@ public class TarefaFXController {
 
         if (resultado.contains("sucesso")) {
             limparCampos();
-            listarTarefas();
+            carregarTarefas();
         }
     }
 
@@ -182,7 +188,7 @@ public class TarefaFXController {
 
         if (resultado.contains("sucesso")) {
             limparCampos();
-            listarTarefas();
+            carregarTarefas();
         }
     }
 
@@ -196,7 +202,8 @@ public class TarefaFXController {
         mostrarMensagem(resultado);
 
         if (resultado.contains("sucesso")) {
-            listarTarefas();
+        	limparCampos();
+        	carregarTarefas();
         }
     }
 
@@ -226,8 +233,13 @@ public class TarefaFXController {
         txtTitulo.clear();
         txtDescricao.clear();
         txtPrazo.clear();
+        
         cbUsuario.getSelectionModel().clearSelection();
+        cbUsuario.setValue(null);
+        
         cbCategoria.getSelectionModel().clearSelection();
+        cbCategoria.setValue(null);
+        
         tarefaSelecionadaId = null;
     }
 

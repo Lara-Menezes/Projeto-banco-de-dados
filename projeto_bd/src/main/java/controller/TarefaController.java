@@ -55,7 +55,7 @@ public class TarefaController {
     public String concluirTarefa(Long id, boolean status) {
         try {
             tarefaService.concluirTarefa(id, status);
-            return "Tarefa atualizada com sucesso!";
+            return "Tarefa concluída com sucesso!";
         } catch (IllegalArgumentException e) {
             return e.getMessage();
         } catch (Exception e) {
@@ -65,5 +65,9 @@ public class TarefaController {
 
     public List<Tarefa> listarTarefasPorUsuarioECategoria(Long usuarioId, Long categoriaId) {
         return tarefaService.listarTarefasPorUsuarioECategoria(usuarioId, categoriaId);
+    }
+    
+    public List<Tarefa> listarTodasTarefas() {
+        return tarefaService.listarTodasTarefas();
     }
 }
