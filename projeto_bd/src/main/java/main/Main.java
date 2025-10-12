@@ -15,8 +15,9 @@ public class Main extends Application {
         // ícone (coloque /view/images/logo.png em resources)
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/view/logo.png")));
 
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.setTitle("To do Check");
+        stage.setMaximized(true);
 
         // abre a cena inicial via ScreenManager (ele também adiciona o CSS)
         ScreenManager.changeScene("menu.fxml");
