@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -14,7 +15,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="550.0" prefWidth="700.0" styleClass="root" stylesheets="@tarefa.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controller.TarefaFXController">
+<BorderPane styleClass="root" stylesheets="@tarefa.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controller.TarefaFXController">
 
 
     <center>
@@ -33,11 +34,11 @@
                     <TextField fx:id="txtDescricao" prefWidth="300" styleClass="textfield-red" />
                 </HBox>
 
-                <HBox alignment="CENTER" spacing="15">
-                    <Label alignment="CENTER_RIGHT" prefWidth="100" styleClass="label-form" text="Prazo" />
-                    <TextField fx:id="txtPrazo" prefWidth="300" styleClass="textfield-red" />
-                </HBox>
-
+				<HBox alignment="CENTER" spacing="15">
+    				<Label alignment="CENTER_RIGHT" prefWidth="100" styleClass="label-form" text="Prazo" />
+    				<DatePicker fx:id="dpPrazo" prefWidth="300" styleClass="textfield-red" />
+				</HBox>
+				
                 <HBox alignment="CENTER" spacing="15">
                     <Label alignment="CENTER_RIGHT" prefWidth="100" styleClass="label-form" text="Usuário" />
                     <ComboBox fx:id="cbUsuario" prefWidth="300" styleClass="textfield-red" />
@@ -76,7 +77,7 @@
 
 
                 <Label fx:id="lblMensagem" styleClass="label-form" text="" />
-					<TableView fx:id="tabelaTarefas" prefHeight="250" prefWidth="700">
+					<TableView fx:id="tabelaTarefas" prefHeight="250" VBox.vgrow="ALWAYS">
                 		<columns>
                     		<TableColumn fx:id="colTitulo" prefWidth="150" styleClass="table-column" text="Título" />
                     		<TableColumn fx:id="colDescricao" prefWidth="200" styleClass="table-column" text="Descrição" />
