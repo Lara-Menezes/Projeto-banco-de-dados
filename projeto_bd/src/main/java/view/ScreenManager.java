@@ -25,7 +25,21 @@ public class ScreenManager {
         Parent root = FXMLLoader.load(resource);
         Scene scene = new Scene(root);
 
+        // 🔹 Guarda o tamanho atual da janela antes de trocar de cena
+        double width = stage.getWidth();
+        double height = stage.getHeight();
+        boolean maximized = stage.isMaximized();
+
+        // 🔹 Aplica a nova cena
         stage.setScene(scene);
+
+        // 🔹 Restaura o tamanho original ou estado maximizado
+        stage.setWidth(width);
+        stage.setHeight(height);
+        stage.setMaximized(maximized);
+
         stage.show();
     }
+
+
 }
