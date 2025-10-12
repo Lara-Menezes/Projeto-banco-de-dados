@@ -1,11 +1,13 @@
 package dto;
 
+import java.time.LocalDate;
+
 /* DTO para transferir dados de tarefa entre a interface e o Service/Controller */
 
 public class TarefaDTO {
     private String titulo;
     private String descricao;
-    private String prazo;
+    private LocalDate prazo;
     private boolean concluida;
     private Long usuarioId;
     private Long categoriaId;
@@ -18,8 +20,8 @@ public class TarefaDTO {
     public String getDescricao() { return descricao; }
     public void setDescricao(String descricao) { this.descricao = descricao; }
 
-    public String getPrazo() { return prazo; }
-    public void setPrazo(String prazo) { this.prazo = prazo; }
+    public LocalDate getPrazo() { return prazo; }
+    public void setPrazo(LocalDate prazo) { this.prazo = prazo; }
 
     public boolean isConcluida() { return concluida; }
     public void setConcluida(boolean concluida) { this.concluida = concluida; }
