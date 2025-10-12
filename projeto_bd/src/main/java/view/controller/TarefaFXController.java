@@ -17,14 +17,14 @@ import service.TarefaService;
 import service.UsuarioService;
 import view.ScreenManager;
 
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 import java.util.List;
 
 public class TarefaFXController {
 
     @FXML private TextField txtTitulo;
     @FXML private TextField txtDescricao;
-    @FXML private TextField txtPrazo;
+    @FXML private DatePicker dpPrazo;
     @FXML private ComboBox<Usuario> cbUsuario;
     @FXML private ComboBox<Categoria> cbCategoria;
 
@@ -40,12 +40,14 @@ public class TarefaFXController {
     @FXML private TableView<Tarefa> tabelaTarefas;
     @FXML private TableColumn<Tarefa, String> colTitulo;
     @FXML private TableColumn<Tarefa, String> colDescricao;
-    @FXML private TableColumn<Tarefa, String> colPrazo;
+    @FXML private TableColumn<Tarefa, LocalDate> colPrazo;
     @FXML private TableColumn<Tarefa, Boolean> colConcluida;
 
     private final UsuarioService usuarioService = new UsuarioService();
     private final CategoriaService categoriaService = new CategoriaService();
     private final TarefaController tarefaController;
+
+    private Long tarefaSelecionadaId = null;
 
     public TarefaFXController() {
         TarefaDAO tarefaDAO = new TarefaDAO();
@@ -55,15 +57,13 @@ public class TarefaFXController {
         this.tarefaController = new TarefaController(tarefaService);
     }
 
-    private Long tarefaSelecionadaId = null;
-
     @FXML
     public void initialize() {
         // Inicializa os botões
         btnSalvar.setOnAction(e -> salvarTarefa());
-//        btnAtualizar.setOnAction(e -> atualizarTarefa()); para quando for implementar a atualização da tarefa
+        btnAtualizar.setOnAction(e -> atualizarTarefa());
         btnExcluir.setOnAction(e -> excluirTarefa());
-        btnConcluir.setOnAction(e -> concluirTarefa()); 
+        btnConcluir.setOnAction(e -> concluirTarefa());
         btnListar.setOnAction(e -> listarTarefas());
         btnVoltar.setOnAction(e -> voltar());
 
@@ -74,6 +74,7 @@ public class TarefaFXController {
         configurarComboBoxes();
         configurarTabela();
         carregarTarefas();
+        tabelaTarefas.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     private void configurarComboBoxes() {
@@ -122,7 +123,7 @@ public class TarefaFXController {
             }
         });
     }
-    
+
     private void carregarTarefas() {
         List<Tarefa> tarefas = tarefaController.listarTodasTarefas();
         tabelaTarefas.setItems(FXCollections.observableArrayList(tarefas));
@@ -137,10 +138,15 @@ public class TarefaFXController {
             return;
         }
 
+        if (dpPrazo.getValue() == null) {
+            mostrarMensagem("Selecione uma data para o prazo!");
+            return;
+        }
+
         TarefaDTO dto = new TarefaDTO();
         dto.setTitulo(txtTitulo.getText());
         dto.setDescricao(txtDescricao.getText());
-        dto.setPrazo(txtPrazo.getText());
+        dto.setPrazo(dpPrazo.getValue());
         dto.setConcluida(false);
         dto.setUsuarioId(usuario.getId());
         dto.setCategoriaId(categoria.getId());
@@ -153,17 +159,22 @@ public class TarefaFXController {
             carregarTarefas();
         }
     }
-    
+
     private void atualizarTarefa() {
         if (tarefaSelecionadaId == null) {
             mostrarMensagem("Selecione uma tarefa para atualizar!");
             return;
         }
 
+        if (dpPrazo.getValue() == null) {
+            mostrarMensagem("Selecione uma data para o prazo!");
+            return;
+        }
+
         TarefaDTO dto = new TarefaDTO();
         dto.setTitulo(txtTitulo.getText());
         dto.setDescricao(txtDescricao.getText());
-        dto.setPrazo(txtPrazo.getText());
+        dto.setPrazo(dpPrazo.getValue());
         dto.setConcluida(false);
         dto.setUsuarioId(cbUsuario.getValue().getId());
         dto.setCategoriaId(cbCategoria.getValue().getId());
@@ -202,11 +213,10 @@ public class TarefaFXController {
         mostrarMensagem(resultado);
 
         if (resultado.contains("sucesso")) {
-        	limparCampos();
-        	carregarTarefas();
+            limparCampos();
+            carregarTarefas();
         }
     }
-
 
     private void listarTarefas() {
         Usuario usuario = cbUsuario.getValue();
@@ -224,7 +234,7 @@ public class TarefaFXController {
     private void preencherCampos(Tarefa tarefa) {
         txtTitulo.setText(tarefa.getTitulo());
         txtDescricao.setText(tarefa.getDescricao());
-        txtPrazo.setText(tarefa.getPrazo().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        dpPrazo.setValue(tarefa.getPrazo());
         cbUsuario.setValue(tarefa.getOwner());
         cbCategoria.setValue(tarefa.getCategoria());
     }
@@ -232,14 +242,14 @@ public class TarefaFXController {
     private void limparCampos() {
         txtTitulo.clear();
         txtDescricao.clear();
-        txtPrazo.clear();
-        
+        dpPrazo.setValue(null);
+
         cbUsuario.getSelectionModel().clearSelection();
         cbUsuario.setValue(null);
-        
+
         cbCategoria.getSelectionModel().clearSelection();
         cbCategoria.setValue(null);
-        
+
         tarefaSelecionadaId = null;
     }
 
