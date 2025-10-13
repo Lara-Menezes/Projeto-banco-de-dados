@@ -1,12 +1,20 @@
 package service;
 
+import dao.CategoriaDAO;
+import dao.TarefaDAO;
 import dao.UsuarioDAO;
+import model.Tarefa;
 import model.Usuario;
 import java.util.List;
 
 public class UsuarioService {
 
     private final UsuarioDAO usuarioDAO = new UsuarioDAO();
+    private final TarefaService tarefaService = new TarefaService(
+            new TarefaDAO(),
+            new UsuarioDAO(),
+            new CategoriaDAO()
+    );
 
     public void criarUsuario(Usuario usuario) {
         usuarioDAO.salvar(usuario);
@@ -17,7 +25,8 @@ public class UsuarioService {
     }
 
     public List<Usuario> listarUsuarios() {
-        return usuarioDAO.listarTodos();
+        List<Usuario> usuarios = usuarioDAO.listarTodos();
+        return usuarios;
     }
 
     public void atualizarUsuario(Usuario usuario) {
@@ -25,6 +34,9 @@ public class UsuarioService {
     }
 
     public void excluirUsuario(Long id) {
+        tarefaService.deletarPorUsuario(id);
         usuarioDAO.excluir(id);
+
+
     }
 }

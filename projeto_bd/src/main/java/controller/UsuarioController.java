@@ -3,6 +3,8 @@ package controller;
 import model.Usuario;
 import service.UsuarioService;
 
+import java.util.List;
+
 /*
  * Usuario controller tem a função de chamar o usuario service (que tem os serviços da regra de negócio)
  * para salvar um usuário. Essa classe instancia um objeto final do usuario service e faz a lógica para salvar o usuário
@@ -35,5 +37,14 @@ public class UsuarioController {
     	usuario.setEmail(email);
     	usuarioService.atualizarUsuario(usuario);
     	return "Sucesso na atualização de usuário!";
+    }
+
+    public String deletarUsuario(Long id){
+        usuarioService.excluirUsuario(id);
+        return "Usuário deletado";
+    }
+
+    public List<Usuario> ListarUsuarios(){
+        return usuarioService.listarUsuarios();
     }
 }

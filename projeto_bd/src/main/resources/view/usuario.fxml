@@ -11,6 +11,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="view.controller.UsuarioFXController"
             stylesheets="@user.css"
@@ -28,19 +30,29 @@
 
                 <Label text="Email" styleClass="label-form" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
                 <TextField fx:id="txtEmail" styleClass="textfield-red" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                <Label text="ID" styleClass="label-form" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtId" promptText="ID (para atualizar ou deletar)" styleClass="textfield-red" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
             </GridPane>
 
 
             <VBox alignment="CENTER" spacing="15">
            
-        <!-- campo que informa o id do usuario a ser atualizado --> 
-		<TextField fx:id="txtId" promptText="ID (para atualizar)" />
-		<Button fx:id="btnAtualizar" text="Atualizar" onAction="#atualizar" styleClass="button-green"/>
-            
+        <!-- campo que informa o id do usuario a ser atualizado -->
+                <Button fx:id="btnListar" text="Listar" onAction="#listar" styleClass="button-green"/>
+                <Button fx:id="btnAtualizar" text="Atualizar" onAction="#atualizar" styleClass="button-green"/>
                 <Button fx:id="btnSalvar" text="Salvar" styleClass="button-green"/>
+                <Button fx:id="btnDeletar" text="Deletar" onAction="#deletar" styleClass="button-green"/>
+
                 <Label fx:id="lblMensagem" text="" styleClass="label-form"/>
             </VBox>
-
+            <TableView fx:id="tabelaUsuarios">
+                <columns>
+                    <TableColumn fx:id="colId" text="ID" />
+                    <TableColumn fx:id="colNome" text="Nome" />
+                    <TableColumn fx:id="colEmail" text="Email" />
+                </columns>
+            </TableView>
         </VBox>
     </center>
 

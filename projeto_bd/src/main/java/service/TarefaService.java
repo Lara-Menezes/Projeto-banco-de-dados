@@ -13,11 +13,11 @@ public class TarefaService {
     private final UsuarioDAO usuarioDAO;
     private final CategoriaDAO categoriaDAO;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
     public TarefaService(TarefaDAO tarefaDAO, UsuarioDAO usuarioDAO, CategoriaDAO categoriaDAO) {
         this.tarefaDAO = tarefaDAO;
         this.usuarioDAO = usuarioDAO;
         this.categoriaDAO = categoriaDAO;
+
     }
 
     public void criarTarefa(TarefaDTO dto) {
@@ -82,6 +82,13 @@ public class TarefaService {
     
     public List<Tarefa> listarTodasTarefas() {
         return tarefaDAO.listarTodos();
+    }
+
+    public void deletarPorUsuario(Long usuarioId) {
+        List<Tarefa> tarefas = tarefaDAO.listarPorUsuario(usuarioId);
+        for (Tarefa t : tarefas) {
+            tarefaDAO.excluir(t.getId());
+        }
     }
 }
 
