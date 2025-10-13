@@ -20,7 +20,7 @@
 
     <center>
         <VBox alignment="CENTER" prefWidth="600" spacing="30">
-			<Label fx:id="lblMensagem" styleClass="label-form"/>
+			<Label fx:id="lblMensagem" styleClass="label-form" />
 
             <VBox alignment="CENTER" spacing="15">
 
@@ -62,9 +62,7 @@
                     <Button fx:id="btnAtualizar" styleClass="button-round-green">
                         <graphic><ImageView fitHeight="22" preserveRatio="true"><image><Image url="@update.png" /></image></ImageView></graphic>
                     </Button>
-   
-   
-                   <Label fx:id="lblMensagem2" styleClass="label-form" text="update" />
+                    <Label fx:id="lblMensagem2" styleClass="label-form" text="update" />
 
                     <Button fx:id="btnExcluir" styleClass="button-round">
                         <graphic><ImageView fitHeight="22" preserveRatio="true"><image><Image url="@delete.png" /></image></ImageView></graphic>
@@ -110,6 +108,9 @@
             <Button fx:id="btnAjuda" styleClass="button-round">
                 <graphic><ImageView fitHeight="22" preserveRatio="true"><image><Image url="@Vector.png" /></image></ImageView></graphic>
             </Button>
+         <Button fx:id="btnlimpar" styleClass="button-round">
+            <graphic><ImageView fitHeight="22" preserveRatio="true"><image><Image url="@clear.png" /></image></ImageView></graphic>
+         </Button>
         </HBox>
     </bottom>
 </BorderPane>
