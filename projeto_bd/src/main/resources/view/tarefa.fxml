@@ -20,7 +20,7 @@
 
     <center>
         <VBox alignment="CENTER" prefWidth="600" spacing="30">
-
+			<Label fx:id="lblMensagem" styleClass="label-form"/>
 
             <VBox alignment="CENTER" spacing="15">
 
@@ -64,22 +64,22 @@
                     </Button>
    
    
-                   <Label fx:id="lblMensagem" styleClass="label-form" text="update" />
+                   <Label fx:id="lblMensagem2" styleClass="label-form" text="update" />
 
                     <Button fx:id="btnExcluir" styleClass="button-round">
                         <graphic><ImageView fitHeight="22" preserveRatio="true"><image><Image url="@delete.png" /></image></ImageView></graphic>
                     </Button>
-               <Label fx:id="lblMensagem11" styleClass="label-form" text="delete" />
+               <Label fx:id="lblMensagem3" styleClass="label-form" text="delete" />
 
                     <Button fx:id="btnListar" styleClass="button-round-green">
                         <graphic><ImageView fitHeight="22" preserveRatio="true"><image><Image url="@list.png" /></image></ImageView></graphic>
                     </Button>
-               <Label fx:id="lblMensagem111" styleClass="label-form" text="list" />
+               <Label fx:id="lblMensagem4" styleClass="label-form" text="list" />
 
                     <Button fx:id="btnConcluir" styleClass="button-round">
                         <graphic><ImageView fitHeight="22" preserveRatio="true"><image><Image url="@check.png" /></image></ImageView></graphic>
                     </Button>
-               <Label fx:id="lblMensagem1111" styleClass="label-form" text="check" />
+               <Label fx:id="lblMensagem5" styleClass="label-form" text="check" />
                 </HBox>
 					<TableView fx:id="tabelaTarefas" prefHeight="250" VBox.vgrow="ALWAYS">
                 		<columns>
