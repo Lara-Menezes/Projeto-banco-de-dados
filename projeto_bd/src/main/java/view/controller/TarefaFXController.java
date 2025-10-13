@@ -34,6 +34,7 @@ public class TarefaFXController {
     @FXML private Button btnConcluir;
     @FXML private Button btnListar;
     @FXML private Button btnVoltar;
+    @FXML private Button btnlimpar;
 
     @FXML private Label lblMensagem;
 
@@ -66,6 +67,7 @@ public class TarefaFXController {
         btnConcluir.setOnAction(e -> concluirTarefa());
         btnListar.setOnAction(e -> listarTarefas());
         btnVoltar.setOnAction(e -> voltar());
+        btnlimpar.setOnAction(e -> limparCampos());
 
         // Preenche combo boxes
         cbUsuario.getItems().addAll(usuarioService.listarUsuarios());
