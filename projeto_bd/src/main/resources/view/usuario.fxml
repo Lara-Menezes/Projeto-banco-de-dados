@@ -3,54 +3,61 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="view.controller.UsuarioFXController"
-            stylesheets="@user.css"
-            prefWidth="500" prefHeight="400"
-            styleClass="root">
+<BorderPane prefHeight="400" prefWidth="500" styleClass="root" stylesheets="@user.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="view.controller.UsuarioFXController">
 
 
     <center>
         <VBox alignment="CENTER" spacing="30">
 
 
-            <GridPane hgap="20" vgap="15" alignment="CENTER">
-                <Label text="Nome" styleClass="label-form" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                <TextField fx:id="txtNome" styleClass="textfield-red" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+            <GridPane alignment="CENTER" hgap="20" vgap="15">
+                <Label styleClass="label-form" text="Nome" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="txtNome" styleClass="textfield-red" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-                <Label text="Email" styleClass="label-form" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                <TextField fx:id="txtEmail" styleClass="textfield-red" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                <Label styleClass="label-form" text="Email" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <TextField fx:id="txtEmail" styleClass="textfield-red" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                <Label text="ID" styleClass="label-form" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                <TextField fx:id="txtId" promptText="ID (para atualizar ou deletar)" styleClass="textfield-red" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                <Label styleClass="label-form" text="ID" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextField fx:id="txtId" promptText="ID (para atualizar ou deletar)" styleClass="textfield-red" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <columnConstraints>
+               <ColumnConstraints />
+               <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+            </rowConstraints>
             </GridPane>
 
 
             <VBox alignment="CENTER" spacing="15">
            
         <!-- campo que informa o id do usuario a ser atualizado -->
-                <Button fx:id="btnListar" text="Listar" onAction="#listar" styleClass="button-green"/>
-                <Button fx:id="btnAtualizar" text="Atualizar" onAction="#atualizar" styleClass="button-green"/>
-                <Button fx:id="btnSalvar" text="Salvar" styleClass="button-green"/>
-                <Button fx:id="btnDeletar" text="Deletar" onAction="#deletar" styleClass="button-green"/>
+                <Button fx:id="btnListar" onAction="#listar" styleClass="button-green" text="Listar" />
+                <Button fx:id="btnAtualizar" onAction="#atualizar" styleClass="button-green" text="Atualizar" />
+                <Button fx:id="btnSalvar" styleClass="button-green" text="Salvar" />
+                <Button fx:id="btnDeletar" onAction="#deletar" styleClass="button-green" text="Deletar" />
 
-                <Label fx:id="lblMensagem" text="" styleClass="label-form"/>
+                <Label fx:id="lblMensagem" styleClass="label-form" text="" />
             </VBox>
-            <TableView fx:id="tabelaUsuarios">
+            <TableView fx:id="tabelaUsuarios" VBox.vgrow="ALWAYS">
                 <columns>
-                    <TableColumn fx:id="colId" text="ID" />
-                    <TableColumn fx:id="colNome" text="Nome" />
-                    <TableColumn fx:id="colEmail" text="Email" />
+                    <TableColumn fx:id="colId" styleClass="table-column" text="ID" />
+                    <TableColumn fx:id="colNome" styleClass="table-column" text="Nome" />
+                    <TableColumn fx:id="colEmail" styleClass="table-column" text="Email" />
                 </columns>
             </TableView>
         </VBox>
@@ -60,14 +67,14 @@
     <bottom>
         <HBox alignment="CENTER" spacing="350">
             <padding>
-                <Insets top="10" right="10" bottom="10" left="10"/>
+                <Insets bottom="10" left="10" right="10" top="10" />
             </padding>
 
             <Button fx:id="btnVoltar" styleClass="button-round">
                 <graphic>
                     <ImageView fitHeight="18" preserveRatio="true">
                         <image>
-                            <Image url="@voltar.png"/> 
+                            <Image url="@voltar.png" /> 
                         </image>
                     </ImageView>
                 </graphic>
@@ -77,11 +84,14 @@
                 <graphic>
                     <ImageView fitHeight="18" preserveRatio="true">
                         <image>
-                            <Image url="@Vector.png"/> 
+                            <Image url="@Vector.png" /> 
                         </image>
                     </ImageView>
-                </graphic>
+                </graphic>               
             </Button>
+         	<Button fx:id="btnlimpar" styleClass="button-round">
+            	<graphic><ImageView fitHeight="22" preserveRatio="true"><image><Image url="@clear.png" /></image></ImageView></graphic>
+         	</Button> 
         </HBox>
     </bottom>
 </BorderPane>

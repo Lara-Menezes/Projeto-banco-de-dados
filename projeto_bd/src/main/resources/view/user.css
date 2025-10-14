@@ -17,6 +17,12 @@
     -fx-effect: dropshadow(gaussian, gray, 4, 0.3, 2, 2);
 }
 
+.table-view .column-header .label {
+    -fx-text-fill: #ffffff;          
+    -fx-font-weight: bold;           
+    -fx-font-size: 14px;    
+    -fx-background-color: #2E7D32;          
+}
 
 .button-green {
     -fx-background-color: #2E7D32;

@@ -253,6 +253,8 @@ public class TarefaFXController {
         cbCategoria.setValue(null);
 
         tarefaSelecionadaId = null;
+        carregarTarefas();
+        
     }
 
     private void voltar() {

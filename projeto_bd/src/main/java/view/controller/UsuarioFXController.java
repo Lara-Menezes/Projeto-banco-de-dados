@@ -22,6 +22,7 @@ public class UsuarioFXController {
     @FXML private TextField txtId;
     @FXML private Button btnAtualizar;
     @FXML private Button btnListar;
+    @FXML private Button btnlimpar;
     @FXML private TableView<Usuario> tabelaUsuarios;
     @FXML private TableColumn<Usuario, Long> colId;
     @FXML private TableColumn<Usuario, String> colNome;
@@ -38,6 +39,9 @@ public class UsuarioFXController {
         btnSalvar.setOnAction(e -> salvarUsuario());
         btnVoltar.setOnAction(this::voltar);
         btnListar.setOnAction(e -> listar());
+        btnlimpar.setOnAction(e -> limparCampos());
+        
+        tabelaUsuarios.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
     }
 
@@ -101,6 +105,13 @@ public class UsuarioFXController {
     private void listar() {
         List<Usuario> usuarios = usuarioController.ListarUsuarios();
         tabelaUsuarios.setItems(FXCollections.observableArrayList(usuarios));
+    }
+    
+    private void limparCampos() {
+        txtNome.clear();
+        txtEmail.clear();
+        txtId.clear();
+
     }
 
     private void voltar(ActionEvent event) {
