@@ -49,6 +49,8 @@ public class TarefaFXController {
     private final TarefaController tarefaController;
 
     private Long tarefaSelecionadaId = null;
+    private Tarefa tarefaSelecionada = null;
+
 
     public TarefaFXController() {
         TarefaDAO tarefaDAO = new TarefaDAO();
@@ -121,6 +123,7 @@ public class TarefaFXController {
             Tarefa selecionada = tabelaTarefas.getSelectionModel().getSelectedItem();
             if (selecionada != null) {
                 preencherCampos(selecionada);
+                tarefaSelecionada = selecionada;
                 tarefaSelecionadaId = selecionada.getId();
             }
         });
@@ -185,7 +188,7 @@ public class TarefaFXController {
         dto.setTitulo(txtTitulo.getText());
         dto.setDescricao(txtDescricao.getText());
         dto.setPrazo(dpPrazo.getValue());
-        dto.setConcluida(false);
+        dto.setConcluida(tarefaSelecionada.isConcluida());
         dto.setUsuarioId(cbUsuario.getValue().getId());
         dto.setCategoriaId(cbCategoria.getValue().getId());
 
@@ -232,12 +235,24 @@ public class TarefaFXController {
         Usuario usuario = cbUsuario.getValue();
         Categoria categoria = cbCategoria.getValue();
 
-        if (usuario == null || categoria == null) {
-            mostrarMensagem("Selecione usuário e categoria para listar!");
+        List<Tarefa> tarefas;
+
+        if (usuario != null && categoria != null) {
+            tarefas = tarefaController.listarTarefasPorUsuarioECategoria(usuario.getId(), categoria.getId());
+            mostrarMensagem("Listando tarefas do usuário: " + usuario.getNome() + ". Na categoria : " + categoria.getNome());
+        } 
+        else if (usuario != null) {
+            tarefas = tarefaController.listarTarefasPorUsuario(usuario.getId());
+            mostrarMensagem("Listando tarefas do usuário: " + usuario.getNome());
+        } 
+        else if (categoria != null) {
+            tarefas = tarefaController.listarTarefasPorCategoria(categoria.getId());
+            mostrarMensagem("Listando tarefas da categoria: " + categoria.getNome());
+        } 
+        else {
+            mostrarMensagem("Todas as tarefas estão listadas");
             return;
         }
-
-        List<Tarefa> tarefas = tarefaController.listarTarefasPorUsuarioECategoria(usuario.getId(), categoria.getId());
         tabelaTarefas.setItems(FXCollections.observableArrayList(tarefas));
     }
 

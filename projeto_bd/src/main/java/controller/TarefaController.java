@@ -67,6 +67,14 @@ public class TarefaController {
         return tarefaService.listarTarefasPorUsuarioECategoria(usuarioId, categoriaId);
     }
     
+    public List<Tarefa> listarTarefasPorUsuario(Long usuarioId) {
+        return tarefaService.listarTarefasPorUsuario(usuarioId);
+    }
+    
+    public List<Tarefa> listarTarefasPorCategoria(Long categoriaId) {
+        return tarefaService.listarTarefasPorCategoria(categoriaId);
+    }
+    
     public List<Tarefa> listarTodasTarefas() {
         return tarefaService.listarTodasTarefas();
     }
