@@ -29,7 +29,7 @@ public class TarefaService {
 
         LocalDate prazo = dto.getPrazo();
         if (prazo.isBefore(LocalDate.now()))
-            throw new IllegalArgumentException("Data inválida: o prazo não pode ser anterior à data atual.");
+            throw new IllegalArgumentException("Coloque uma data futura, leve em conta o prazo a ser realizado!");
 
         Tarefa tarefa = new Tarefa();
         tarefa.setTitulo(dto.getTitulo());
@@ -47,6 +47,10 @@ public class TarefaService {
         if (tarefa == null) throw new IllegalArgumentException("Tarefa não encontrada.");
 
         LocalDate prazo = dto.getPrazo();
+        if(prazo.isBefore(LocalDate.now())) {
+        	throw new IllegalArgumentException("Coloque uma data futura, leve em conta o prazo a ser realizado!");
+        }     
+        
         tarefa.setTitulo(dto.getTitulo());
         tarefa.setDescricao(dto.getDescricao());
         tarefa.setPrazo(prazo);

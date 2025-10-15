@@ -144,6 +144,10 @@ public class TarefaFXController {
             mostrarMensagem("Selecione uma data para o prazo!");
             return;
         }
+        
+        if(dpPrazo.getValue().isBefore(LocalDate.now())) {
+        	mostrarMensagem("Coloque uma data futura. considere o prazo a ser realizado!");
+        }
 
         TarefaDTO dto = new TarefaDTO();
         dto.setTitulo(txtTitulo.getText());
@@ -171,6 +175,10 @@ public class TarefaFXController {
         if (dpPrazo.getValue() == null) {
             mostrarMensagem("Selecione uma data para o prazo!");
             return;
+        }
+        
+        if(dpPrazo.getValue().isBefore(LocalDate.now())) {
+        	mostrarMensagem("Coloque uma data futura, leve em conta o prazo a ser realizado!");
         }
 
         TarefaDTO dto = new TarefaDTO();
