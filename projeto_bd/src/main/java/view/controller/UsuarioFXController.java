@@ -41,6 +41,8 @@ public class UsuarioFXController {
         btnListar.setOnAction(e -> listar());
         btnlimpar.setOnAction(e -> limparCampos());
         
+        listar();
+        
         tabelaUsuarios.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
     }
@@ -55,6 +57,7 @@ public class UsuarioFXController {
             lblMensagem.setStyle("-fx-text-fill: green;");
             txtNome.clear();
             txtEmail.clear();
+            listar();
         } else {
             lblMensagem.setStyle("-fx-text-fill: red;");
         }
@@ -90,7 +93,7 @@ public class UsuarioFXController {
     		UsuarioController uc = new UsuarioController();
     		String resultado = uc.atualizarUsuario(id, nome, email);
     		lblMensagem.setText(resultado);
-            listar();
+    		listar();
     	}
     	catch(NumberFormatException e) {
     		lblMensagem.setText("ID inválido");
