@@ -42,7 +42,7 @@ public class TarefaService {
         tarefaDAO.salvar(tarefa);
     }
 
-    public void atualizarTarefa(Long id, TarefaDTO dto) {
+    public void atualizarTarefa(Integer id, TarefaDTO dto) {
         Tarefa tarefa = tarefaDAO.buscarPorId(id);
         if (tarefa == null) throw new IllegalArgumentException("Tarefa não encontrada.");
 
@@ -67,28 +67,28 @@ public class TarefaService {
         tarefaDAO.atualizar(tarefa);
     }
 
-    public void excluirTarefa(Long id) {
+    public void excluirTarefa(Integer id) {
         Tarefa tarefa = tarefaDAO.buscarPorId(id);
         if (tarefa == null) throw new IllegalArgumentException("Tarefa não encontrada.");
         tarefaDAO.excluir(id);
     }
 
-    public void concluirTarefa(Long id, boolean status) {
+    public void concluirTarefa(Integer id, boolean status) {
         Tarefa tarefa = tarefaDAO.buscarPorId(id);
         if (tarefa == null) throw new IllegalArgumentException("Tarefa não encontrada.");
         tarefa.setConcluida(status);
         tarefaDAO.atualizar(tarefa);
     }
 
-    public List<Tarefa> listarTarefasPorUsuarioECategoria(Long usuarioId, Long categoriaId) {
+    public List<Tarefa> listarTarefasPorUsuarioECategoria(Integer usuarioId, Integer categoriaId) {
         return tarefaDAO.listarPorUsuarioECategoria(usuarioId, categoriaId);
     }
     
-    public List<Tarefa> listarTarefasPorUsuario(Long usuarioId) {
+    public List<Tarefa> listarTarefasPorUsuario(Integer usuarioId) {
         return tarefaDAO.listarPorUsuario(usuarioId);
     }
     
-    public List<Tarefa> listarTarefasPorCategoria(Long categoriaId) {
+    public List<Tarefa> listarTarefasPorCategoria(Integer categoriaId) {
         return tarefaDAO.listarPorCategoria(categoriaId);
     }
     
@@ -97,7 +97,7 @@ public class TarefaService {
         return tarefaDAO.listarTodos();
     }
 
-    public void deletarPorUsuario(Long usuarioId) {
+    public void deletarPorUsuario(Integer usuarioId) {
         List<Tarefa> tarefas = tarefaDAO.listarPorUsuario(usuarioId);
         for (Tarefa t : tarefas) {
             tarefaDAO.excluir(t.getId());

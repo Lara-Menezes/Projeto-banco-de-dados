@@ -6,7 +6,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.Tarefa;
 import model.Usuario;
 import view.ScreenManager; // importante para trocar de telas
 
@@ -72,7 +71,7 @@ public class UsuarioFXController {
                 lblMensagem.setText("Informe o id do usuário para deletar.");
                 return;
             }
-            Long id = Long.parseLong(idText);
+            Integer id = Integer.parseInt(idText);
             usuarioController.deletarUsuario(id);
             listar();
         } catch (Exception e) {
@@ -87,7 +86,7 @@ public class UsuarioFXController {
     			lblMensagem.setText("Informe o id do usuário para atualizar.");
     			return;
     		}
-    		Long id = Long.parseLong(idText);
+    		Integer id = Integer.parseInt(idText);
     		String nome = txtNome.getText();
     		String email = txtEmail.getText();
     		UsuarioController uc = new UsuarioController();

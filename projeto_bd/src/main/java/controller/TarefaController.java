@@ -30,7 +30,7 @@ public class TarefaController {
         }
     }
 
-    public String atualizarTarefa(Long id, TarefaDTO dto) {
+    public String atualizarTarefa(Integer id, TarefaDTO dto) {
         try {
             tarefaService.atualizarTarefa(id, dto);
             return "Tarefa atualizada com sucesso!";
@@ -41,7 +41,7 @@ public class TarefaController {
         }
     }
 
-    public String excluirTarefa(Long id) {
+    public String excluirTarefa(Integer id) {
         try {
             tarefaService.excluirTarefa(id);
             return "Tarefa excluída com sucesso!";
@@ -52,7 +52,7 @@ public class TarefaController {
         }
     }
 
-    public String concluirTarefa(Long id, boolean status) {
+    public String concluirTarefa(Integer id, boolean status) {
         try {
             tarefaService.concluirTarefa(id, status);
             return "Tarefa concluída com sucesso!";
@@ -63,15 +63,15 @@ public class TarefaController {
         }
     }
 
-    public List<Tarefa> listarTarefasPorUsuarioECategoria(Long usuarioId, Long categoriaId) {
+    public List<Tarefa> listarTarefasPorUsuarioECategoria(Integer usuarioId, Integer categoriaId) {
         return tarefaService.listarTarefasPorUsuarioECategoria(usuarioId, categoriaId);
     }
     
-    public List<Tarefa> listarTarefasPorUsuario(Long usuarioId) {
+    public List<Tarefa> listarTarefasPorUsuario(Integer usuarioId) {
         return tarefaService.listarTarefasPorUsuario(usuarioId);
     }
     
-    public List<Tarefa> listarTarefasPorCategoria(Long categoriaId) {
+    public List<Tarefa> listarTarefasPorCategoria(Integer categoriaId) {
         return tarefaService.listarTarefasPorCategoria(categoriaId);
     }
     

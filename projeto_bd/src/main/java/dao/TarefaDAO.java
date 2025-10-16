@@ -15,7 +15,7 @@ public class TarefaDAO extends GenericDAO<Tarefa> {
         super(Tarefa.class);
     }
 
-    public List<Tarefa> listarPorUsuario(Long usuarioId) {
+    public List<Tarefa> listarPorUsuario(Integer usuarioId) {
         EntityManager em = null;
         try {
             em = super.emf.createEntityManager();
@@ -28,7 +28,7 @@ public class TarefaDAO extends GenericDAO<Tarefa> {
         }
     }
 
-    public List<Tarefa> listarPorCategoria(Long categoriaId) {
+    public List<Tarefa> listarPorCategoria(Integer categoriaId) {
         EntityManager em = null;
         try {
             em = super.emf.createEntityManager();
@@ -41,7 +41,7 @@ public class TarefaDAO extends GenericDAO<Tarefa> {
         }
     }
 
-    public List<Tarefa> listarPorUsuarioECategoria(Long usuarioId, Long categoriaId) {
+    public List<Tarefa> listarPorUsuarioECategoria(Integer usuarioId, Integer categoriaId) {
         EntityManager em = null;
         try {
             em = super.emf.createEntityManager();

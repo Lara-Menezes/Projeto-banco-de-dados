@@ -9,8 +9,8 @@ public class TarefaDTO {
     private String descricao;
     private LocalDate prazo;
     private boolean concluida;
-    private Long usuarioId;
-    private Long categoriaId;
+    private Integer usuarioId;
+    private Integer categoriaId;
 
     public TarefaDTO() {}
 
@@ -26,9 +26,9 @@ public class TarefaDTO {
     public boolean isConcluida() { return concluida; }
     public void setConcluida(boolean concluida) { this.concluida = concluida; }
 
-    public Long getUsuarioId() { return usuarioId; }
-    public void setUsuarioId(Long usuarioId) { this.usuarioId = usuarioId; }
+    public Integer getUsuarioId() { return usuarioId; }
+    public void setUsuarioId(Integer usuarioId) { this.usuarioId = usuarioId; }
 
-    public Long getCategoriaId() { return categoriaId; }
-    public void setCategoriaId(Long categoriaId) { this.categoriaId = categoriaId; }
+    public Integer getCategoriaId() { return categoriaId; }
+    public void setCategoriaId(Integer categoriaId) { this.categoriaId = categoriaId; }
 }

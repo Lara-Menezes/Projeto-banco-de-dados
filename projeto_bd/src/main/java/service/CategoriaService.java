@@ -12,7 +12,7 @@ public class CategoriaService {
         categoriaDAO.salvar(categoria);
     }
 
-    public Categoria buscarCategoria(Long id) {
+    public Categoria buscarCategoria(Integer id) {
         return categoriaDAO.buscarPorId(id);
     }
 
@@ -24,7 +24,7 @@ public class CategoriaService {
         categoriaDAO.atualizar(categoria);
     }
 
-    public void excluirCategoria(Long id) {
+    public void excluirCategoria(Integer id) {
         categoriaDAO.excluir(id);
     }
 }

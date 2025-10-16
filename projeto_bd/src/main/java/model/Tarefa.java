@@ -7,9 +7,8 @@ import jakarta.persistence.*;
 @Table(name = "TB_TAREFAS")
 public class Tarefa {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+    private Integer id;  
 
     @Column(nullable = false)
     private String titulo;
@@ -32,10 +31,18 @@ public class Tarefa {
     private Categoria categoria;
 
     public Tarefa() {}
+    
+    //gera IDs aleatórios de 4 digitos
+    @PrePersist
+    public void gerarId() {
+        if (id == null) {
+            id = (int) (1000 + Math.random() * 9000); 
+        }
+    }
 
     // Getters e Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Integer getId() { return id; }
+    public void setId(Integer id) { this.id = id; }
 
     public String getTitulo() { return titulo; }
     public void setTitulo(String titulo) { this.titulo = titulo; }

@@ -48,7 +48,7 @@ public class TarefaFXController {
     private final CategoriaService categoriaService = new CategoriaService();
     private final TarefaController tarefaController;
 
-    private Long tarefaSelecionadaId = null;
+    private Integer tarefaSelecionadaId = null;
     private Tarefa tarefaSelecionada = null;
 
 

@@ -3,7 +3,6 @@ package service;
 import dao.CategoriaDAO;
 import dao.TarefaDAO;
 import dao.UsuarioDAO;
-import model.Tarefa;
 import model.Usuario;
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class UsuarioService {
         usuarioDAO.salvar(usuario);
     }
 
-    public Usuario buscarUsuario(Long id) {
+    public Usuario buscarUsuario(Integer id) {
         return usuarioDAO.buscarPorId(id);
     }
 
@@ -33,7 +32,7 @@ public class UsuarioService {
         usuarioDAO.atualizar(usuario);
     }
 
-    public void excluirUsuario(Long id) {
+    public void excluirUsuario(Integer id) {
         tarefaService.deletarPorUsuario(id);
         usuarioDAO.excluir(id);
 

@@ -28,7 +28,7 @@ public class GenericDAO<T> {
         }
     }
 
-    public T buscarPorId(Long id) {
+    public T buscarPorId(Integer id) {
         EntityManager em = emf.createEntityManager();
         try {
             return em.find(entityClass, id);
@@ -61,7 +61,7 @@ public class GenericDAO<T> {
         }
     }
 
-    public void excluir(Long id) {
+    public void excluir(Integer id) {
         EntityManager em = emf.createEntityManager();
         try {
             T obj = em.find(entityClass, id);

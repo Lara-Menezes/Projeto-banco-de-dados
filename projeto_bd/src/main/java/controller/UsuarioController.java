@@ -26,7 +26,7 @@ public class UsuarioController {
         return "Usuário cadastrado com sucesso!";
     }
     
-    public String atualizarUsuario(Long id, String nome, String email) {
+    public String atualizarUsuario(Integer id, String nome, String email) {
     	if(id == null) return "id inválido!";
     	if(nome == null || nome.isBlank() || email == null || email.isBlank()) 
     		return "Preencha os campos!";
@@ -39,7 +39,7 @@ public class UsuarioController {
     	return "Sucesso na atualização de usuário!";
     }
 
-    public String deletarUsuario(Long id){
+    public String deletarUsuario(Integer id){
         usuarioService.excluirUsuario(id);
         return "Usuário deletado";
     }
