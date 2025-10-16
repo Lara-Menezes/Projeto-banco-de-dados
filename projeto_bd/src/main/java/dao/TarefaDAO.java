@@ -14,6 +14,18 @@ public class TarefaDAO extends GenericDAO<Tarefa> {
     public TarefaDAO() {
         super(Tarefa.class);
     }
+    
+    @Override
+    public List<Tarefa> listarTodos() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            return em.createQuery(
+                    "FROM Tarefa t ORDER BY t.prazo ASC", Tarefa.class
+            ).getResultList();
+        } finally {
+            em.close();
+        }
+    }
 
     public List<Tarefa> listarPorUsuario(Integer usuarioId) {
         EntityManager em = null;
