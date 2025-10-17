@@ -239,15 +239,12 @@ public class TarefaFXController {
 
         if (usuario != null && categoria != null) {
             tarefas = tarefaController.listarTarefasPorUsuarioECategoria(usuario.getId(), categoria.getId());
-            mostrarMensagem("Listando tarefas do usuário: " + usuario.getNome() + ". Na categoria : " + categoria.getNome());
         } 
         else if (usuario != null) {
             tarefas = tarefaController.listarTarefasPorUsuario(usuario.getId());
-            mostrarMensagem("Listando tarefas do usuário: " + usuario.getNome());
         } 
         else if (categoria != null) {
             tarefas = tarefaController.listarTarefasPorCategoria(categoria.getId());
-            mostrarMensagem("Listando tarefas da categoria: " + categoria.getNome());
         } 
         else {
             mostrarMensagem("Todas as tarefas estão listadas");
