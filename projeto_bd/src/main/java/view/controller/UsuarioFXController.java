@@ -48,6 +48,17 @@ public class UsuarioFXController {
         listar();
         tabelaUsuarios.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
+        tabelaUsuarios.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 1) {
+                Usuario selecionado = tabelaUsuarios.getSelectionModel().getSelectedItem();
+                if (selecionado != null) {
+                    preencherCampos(selecionado);
+                    usuarioSelecionado = selecionado;
+                    usuarioSelecionadoId = selecionado.getId();
+                }
+            }
+        });
+
     }
     
     private void configurarTabela() {
