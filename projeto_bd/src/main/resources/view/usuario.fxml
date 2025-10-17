@@ -28,18 +28,6 @@
 
                 <Label styleClass="label-form" text="Email" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                 <TextField fx:id="txtEmail" styleClass="textfield-red" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-
-                <Label styleClass="label-form" text="ID" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                <TextField fx:id="txtId" promptText="ID (para atualizar ou deletar)" styleClass="textfield-red" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <columnConstraints>
-               <ColumnConstraints />
-               <ColumnConstraints />
-            </columnConstraints>
-            <rowConstraints>
-               <RowConstraints />
-               <RowConstraints />
-               <RowConstraints />
-            </rowConstraints>
             </GridPane>
 
 
