@@ -1,6 +1,7 @@
 package view.controller;
 
 import controller.UsuarioController;
+import dto.UsuarioDTO;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,6 +29,9 @@ public class UsuarioFXController {
     @FXML private TableColumn<Usuario, String> colEmail;
 
     private final UsuarioController usuarioController = new UsuarioController();
+    
+    private Integer usuarioSelecionadoId = null;
+    private Usuario usuarioSelecionado = null;
 
 
     @FXML
@@ -40,67 +44,99 @@ public class UsuarioFXController {
         btnListar.setOnAction(e -> listar());
         btnlimpar.setOnAction(e -> limparCampos());
         
+        configurarTabela();
         listar();
-        
         tabelaUsuarios.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
+    }
+    
+    private void configurarTabela() {
+        colNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+
+        tabelaUsuarios.setOnMouseClicked(event -> {
+            Usuario selecionado = tabelaUsuarios.getSelectionModel().getSelectedItem();
+            if (selecionado != null) {
+                preencherCampos(selecionado);
+                usuarioSelecionado = selecionado;
+                usuarioSelecionadoId = selecionado.getId();
+            }
+        });
     }
 
     private void salvarUsuario() {
         String nome = txtNome.getText();
         String email = txtEmail.getText();
 
-        String resultado = usuarioController.salvarUsuario(nome, email);
+        if (nome == null || nome.isBlank() || email == null || email.isBlank()) {
+            lblMensagem.setText("Preencha todos os campos!");
+            lblMensagem.setStyle("-fx-text-fill: red;");
+            return;
+        }
+
+        UsuarioDTO dto = new UsuarioDTO();
+        dto.setNome(nome);
+        dto.setEmail(email);
+
+        String resultado = usuarioController.salvarUsuario(dto);
+
+        lblMensagem.setText(resultado);
+        lblMensagem.setStyle(resultado.contains("sucesso") ? "-fx-text-fill: green;" : "-fx-text-fill: red;");
 
         if (resultado.contains("sucesso")) {
-            lblMensagem.setStyle("-fx-text-fill: green;");
             txtNome.clear();
             txtEmail.clear();
             listar();
-        } else {
-            lblMensagem.setStyle("-fx-text-fill: red;");
         }
-
-        lblMensagem.setText(resultado);
     }
+    
     @FXML
     private void deletar(){
-        try{
-            String idText = txtId.getText();
-            if(idText == null || idText.isBlank()){
-                lblMensagem.setText("Informe o id do usuário para deletar.");
-                return;
-            }
-            Integer id = Integer.parseInt(idText);
-            usuarioController.deletarUsuario(id);
-            listar();
-        } catch (Exception e) {
-            e.printStackTrace();
+    	if (usuarioSelecionadoId == null) {
+            lblMensagem.setText("Selecione um usuário na tabela para deletar.");
+            lblMensagem.setStyle("-fx-text-fill: red;");
+            return;
+        }
+        
+    	String resultado = usuarioController.deletarUsuario(usuarioSelecionadoId);
+    	lblMensagem.setText(resultado);
+    	
+    	if (resultado.contains("sucesso")) {
+    		listar();
+            limparCampos();
         }
     }
+    
     @FXML
     private void atualizar(ActionEvent event) {
-    	try {
-    		String idText = txtId.getText();
-    		if(idText == null || idText.isBlank()) {
-    			lblMensagem.setText("Informe o id do usuário para atualizar.");
-    			return;
-    		}
-    		Integer id = Integer.parseInt(idText);
-    		String nome = txtNome.getText();
-    		String email = txtEmail.getText();
-    		UsuarioController uc = new UsuarioController();
-    		String resultado = uc.atualizarUsuario(id, nome, email);
-    		lblMensagem.setText(resultado);
-    		listar();
-    	}
-    	catch(NumberFormatException e) {
-    		lblMensagem.setText("ID inválido");
-    	}
-    	catch (Exception e) {
-    		e.printStackTrace();
-    		lblMensagem.setText("Erro ao atualizar o usuário");
-    	}
+        if (usuarioSelecionado == null) {
+            lblMensagem.setText("Selecione um usuário na tabela para atualizar.");
+            lblMensagem.setStyle("-fx-text-fill: red;");
+            return;
+        }
+        
+        String nome = txtNome.getText();
+        String email = txtEmail.getText();
+
+        if (nome == null || nome.isBlank() || email == null || email.isBlank()) {
+            lblMensagem.setText("Preencha todos os campos!");
+            lblMensagem.setStyle("-fx-text-fill: red;");
+            return;
+        }
+
+        UsuarioDTO dto = new UsuarioDTO();
+        dto.setNome(nome);
+        dto.setEmail(email);
+
+        String resultado = usuarioController.atualizarUsuario(usuarioSelecionado.getId(), dto);
+
+        lblMensagem.setText(resultado);
+        lblMensagem.setStyle(resultado.contains("sucesso") ? "-fx-text-fill: green;" : "-fx-text-fill: red;");
+
+        if (resultado.contains("sucesso")) {
+        	listar();
+            limparCampos();
+        }
     }
 
     @FXML
@@ -109,11 +145,23 @@ public class UsuarioFXController {
         tabelaUsuarios.setItems(FXCollections.observableArrayList(usuarios));
     }
     
+    private void preencherCampos(Usuario usuario) {
+        usuarioSelecionado = usuario;
+        txtNome.setText(usuario.getNome());
+        txtEmail.setText(usuario.getEmail());
+    }
+    
     private void limparCampos() {
         txtNome.clear();
         txtEmail.clear();
         txtId.clear();
+        
+        tabelaUsuarios.getSelectionModel().clearSelection();
 
+        usuarioSelecionado = null;
+        usuarioSelecionadoId = null;
+
+        listar();
     }
 
     private void voltar(ActionEvent event) {

@@ -1,5 +1,6 @@
 package controller;
 
+import dto.UsuarioDTO;
 import model.Usuario;
 import service.UsuarioService;
 
@@ -15,33 +16,37 @@ public class UsuarioController {
 
     private final UsuarioService usuarioService = new UsuarioService();
 
-    public String salvarUsuario(String nome, String email) {
-        if (nome == null || nome.isBlank() || email == null || email.isBlank())
-            return "Preencha todos os campos!";
-
-        Usuario usuario = new Usuario();
-        usuario.setNome(nome);
-        usuario.setEmail(email);
-        usuarioService.criarUsuario(usuario);
-        return "Usuário cadastrado com sucesso!";
+    public String salvarUsuario(UsuarioDTO dto) {
+        try {
+        	usuarioService.criarUsuario(dto);
+            return "Usuário cadastrado com sucesso!";
+        } catch (IllegalArgumentException e) {
+            return e.getMessage();
+        } catch (Exception e) {
+            return "Erro ao salvar usuário: " + e.getMessage();
+        }
     }
     
-    public String atualizarUsuario(Integer id, String nome, String email) {
-    	if(id == null) return "id inválido!";
-    	if(nome == null || nome.isBlank() || email == null || email.isBlank()) 
-    		return "Preencha os campos!";
-    	
-    	Usuario usuario = new Usuario();
-    	usuario.setId(id);
-    	usuario.setNome(nome);
-    	usuario.setEmail(email);
-    	usuarioService.atualizarUsuario(usuario);
-    	return "Sucesso na atualização de usuário!";
+    public String atualizarUsuario(Integer id, UsuarioDTO dto) {
+        try {
+        	usuarioService.atualizarUsuario(id, dto);
+            return "Usuário atualizado com sucesso!";
+        } catch (IllegalArgumentException e) {
+            return e.getMessage();
+        } catch (Exception e) {
+            return "Erro ao atualizar usuário: " + e.getMessage();
+        }
     }
 
-    public String deletarUsuario(Integer id){
-        usuarioService.excluirUsuario(id);
-        return "Usuário deletado";
+    public String deletarUsuario(Integer id) {
+        try {
+        	usuarioService.excluirUsuario(id);
+            return "Usuário deletado com sucesso!";   
+        } catch (IllegalArgumentException e) {
+            return e.getMessage();
+        } catch (Exception e) {
+            return "Erro ao deletar usuário: " + e.getMessage();
+        }
     }
 
     public List<Usuario> ListarUsuarios(){
