@@ -19,7 +19,6 @@ public class UsuarioFXController {
     @FXML private Button btnSalvar;
     @FXML private Button btnVoltar;
     @FXML private Label lblMensagem;
-    @FXML private TextField txtId;
     @FXML private Button btnAtualizar;
     @FXML private Button btnListar;
     @FXML private Button btnlimpar;
@@ -165,7 +164,6 @@ public class UsuarioFXController {
     private void limparCampos() {
         txtNome.clear();
         txtEmail.clear();
-        txtId.clear();
         
         tabelaUsuarios.getSelectionModel().clearSelection();
 
