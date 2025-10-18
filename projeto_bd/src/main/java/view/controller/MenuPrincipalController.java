@@ -27,7 +27,5 @@ public class MenuPrincipalController {
             try { ScreenManager.changeScene("tarefa.fxml"); }
             catch (Exception ex) { ex.printStackTrace(); }
         });
-
-        btnAjuda.setOnAction(e -> System.out.println("Ajuda clicada"));
     }
 }

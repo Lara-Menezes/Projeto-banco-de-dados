@@ -53,15 +53,6 @@
                 </graphic>
             </Button>
 
-            <Button fx:id="btnAjuda" styleClass="button-round">
-                <graphic>
-                    <ImageView fitHeight="18" preserveRatio="true">
-                        <image>
-                            <Image url="@Vector.png"/> 
-                        </image>
-                    </ImageView>
-                </graphic>
-            </Button>
         </HBox>
     </bottom>
 </BorderPane>

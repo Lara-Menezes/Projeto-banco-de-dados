@@ -36,20 +36,6 @@
     </VBox>
 
 
-    <Button fx:id="btnAjuda" styleClass="button-help">
-        <graphic>
-            <ImageView fitHeight="18" preserveRatio="true">
-                <image>
-                    <Image url="@Vector.png"/>
-                </image>
-            </ImageView>
-        </graphic>
-        <StackPane.margin>
-            <Insets bottom="15" right="15"/>
-        </StackPane.margin>
-        <StackPane.alignment>
-            BOTTOM_RIGHT
-        </StackPane.alignment>
-    </Button>
+
 
 </StackPane>
