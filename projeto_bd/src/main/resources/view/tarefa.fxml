@@ -57,27 +57,27 @@
                     <Button fx:id="btnSalvar" styleClass="button-round">
                         <graphic><ImageView fitHeight="22" preserveRatio="true"><image><Image url="@save.png" /></image></ImageView></graphic>
                     </Button>
-               <Label fx:id="lblMensagem1" styleClass="label-form" text="create" />
+               <Label fx:id="lblMensagem1" styleClass="label-form" text="Salvar" />
 
                     <Button fx:id="btnAtualizar" styleClass="button-round-green">
                         <graphic><ImageView fitHeight="22" preserveRatio="true"><image><Image url="@update.png" /></image></ImageView></graphic>
                     </Button>
-                    <Label fx:id="lblMensagem2" styleClass="label-form" text="update" />
+                    <Label fx:id="lblMensagem2" styleClass="label-form" text="Atualizar" />
 
                     <Button fx:id="btnExcluir" styleClass="button-round">
                         <graphic><ImageView fitHeight="22" preserveRatio="true"><image><Image url="@delete.png" /></image></ImageView></graphic>
                     </Button>
-               <Label fx:id="lblMensagem3" styleClass="label-form" text="delete" />
+               <Label fx:id="lblMensagem3" styleClass="label-form" text="Deletar" />
 
                     <Button fx:id="btnListar" styleClass="button-round-green">
                         <graphic><ImageView fitHeight="22" preserveRatio="true"><image><Image url="@list.png" /></image></ImageView></graphic>
                     </Button>
-               <Label fx:id="lblMensagem4" styleClass="label-form" text="list" />
+               <Label fx:id="lblMensagem4" styleClass="label-form" text="Listar" />
 
                     <Button fx:id="btnConcluir" styleClass="button-round">
                         <graphic><ImageView fitHeight="22" preserveRatio="true"><image><Image url="@check.png" /></image></ImageView></graphic>
                     </Button>
-               <Label fx:id="lblMensagem5" styleClass="label-form" text="check" />
+               <Label fx:id="lblMensagem5" styleClass="label-form" text="Concluir" />
                 </HBox>
 					<TableView fx:id="tabelaTarefas" prefHeight="250" VBox.vgrow="ALWAYS">
                 		<columns>
