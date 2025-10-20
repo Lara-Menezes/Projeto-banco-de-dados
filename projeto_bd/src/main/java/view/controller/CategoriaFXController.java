@@ -47,13 +47,4 @@ public class CategoriaFXController {
         }
     }
 
-    
-    private void abrirCategorias(ActionEvent event) {
-        try {
-            ScreenManager.changeScene("categoriaList.fxml"); 
-        } catch (Exception e) {
-            e.printStackTrace();
-            lblMensagem.setText("Erro ao carregar lista de categorias!");
-        }
-    }
 }
