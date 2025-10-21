@@ -15,7 +15,7 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
     
     @Override
     public List<Usuario> listarTodos() {
-    	EntityManager em = emf.createEntityManager();
+    	EntityManager em = JPAUtil.getEntityManager();
         try {
             return em.createQuery("FROM Usuario u ORDER BY u.nome", Usuario.class)
                      .getResultList();

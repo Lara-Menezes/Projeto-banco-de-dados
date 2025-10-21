@@ -17,7 +17,7 @@ public class TarefaDAO extends GenericDAO<Tarefa> {
     
     @Override
     public List<Tarefa> listarTodos() {
-        EntityManager em = emf.createEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();
         try {
             return em.createQuery(
                     "FROM Tarefa t ORDER BY t.prazo ASC", Tarefa.class
@@ -28,9 +28,8 @@ public class TarefaDAO extends GenericDAO<Tarefa> {
     }
 
     public List<Tarefa> listarPorUsuario(Integer usuarioId) {
-        EntityManager em = null;
+    	EntityManager em = JPAUtil.getEntityManager();
         try {
-            em = super.emf.createEntityManager();
             TypedQuery<Tarefa> query = em.createQuery(
                     "SELECT t FROM Tarefa t WHERE t.owner.id = :usuarioId", Tarefa.class);
             query.setParameter("usuarioId", usuarioId);
@@ -41,9 +40,8 @@ public class TarefaDAO extends GenericDAO<Tarefa> {
     }
 
     public List<Tarefa> listarPorCategoria(Integer categoriaId) {
-        EntityManager em = null;
+    	EntityManager em = JPAUtil.getEntityManager();
         try {
-            em = super.emf.createEntityManager();
             TypedQuery<Tarefa> query = em.createQuery(
                     "SELECT t FROM Tarefa t WHERE t.categoria.id = :categoriaId", Tarefa.class);
             query.setParameter("categoriaId", categoriaId);
@@ -54,9 +52,8 @@ public class TarefaDAO extends GenericDAO<Tarefa> {
     }
 
     public List<Tarefa> listarPorUsuarioECategoria(Integer usuarioId, Integer categoriaId) {
-        EntityManager em = null;
+    	EntityManager em = JPAUtil.getEntityManager();
         try {
-            em = super.emf.createEntityManager();
             TypedQuery<Tarefa> query = em.createQuery(
                     "SELECT t FROM Tarefa t WHERE t.owner.id = :usuarioId AND t.categoria.id = :categoriaId", Tarefa.class);
             query.setParameter("usuarioId", usuarioId);

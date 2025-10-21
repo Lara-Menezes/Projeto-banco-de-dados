@@ -5,9 +5,6 @@ import java.util.List;
 
 public class GenericDAO<T> {
 
-    protected static final EntityManagerFactory emf =
-            Persistence.createEntityManagerFactory("TarefasPU");
-
     private final Class<T> entityClass;
 
     public GenericDAO(Class<T> entityClass) {
@@ -15,7 +12,7 @@ public class GenericDAO<T> {
     }
 
     public void salvar(T entity) {
-        EntityManager em = emf.createEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();
         try {
             em.getTransaction().begin();
             em.persist(entity);
@@ -29,7 +26,7 @@ public class GenericDAO<T> {
     }
 
     public T buscarPorId(Integer id) {
-        EntityManager em = emf.createEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();
         try {
             return em.find(entityClass, id);
         } finally {
@@ -38,7 +35,7 @@ public class GenericDAO<T> {
     }
 
     public List<T> listarTodos() {
-        EntityManager em = emf.createEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();
         try {
             return em.createQuery("FROM " + entityClass.getSimpleName(), entityClass)
                      .getResultList();
@@ -48,7 +45,7 @@ public class GenericDAO<T> {
     }
 
     public void atualizar(T entity) {
-        EntityManager em = emf.createEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();
         try {
             em.getTransaction().begin();
             em.merge(entity);
@@ -62,7 +59,7 @@ public class GenericDAO<T> {
     }
 
     public void excluir(Integer id) {
-        EntityManager em = emf.createEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();
         try {
             T obj = em.find(entityClass, id);
             if (obj != null) {
